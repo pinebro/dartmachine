@@ -4,6 +4,13 @@
 Count the scores of darts
 """
 
+color = {
+        0:'\033[0m',
+        1:'\033[91m',
+        2:'\033[93m',
+        3:'\033[92m',
+        }
+
 class Game:
     """
     takes the score of the player and count down the score till 0
@@ -15,23 +22,22 @@ class Game:
         """
         score = 0
         for d in range(1,4):
-            print(target-s)
-            ui = input(f"Enter score of dart {d}: ").lower().strip()
+            print(target-score)
+            ui = input(f"{color[d]}Enter score of dart {d}{color[0]}: ").lower().strip()
             if ui == 'q': break
             try:
                 score += int(ui)
-                c += 1
                 if score > target: 
                     print("Too much...")
                     return target
                 elif target - score == 1:
                     print("Foul!")
                     return target
-                elif target == score:
+                elif target - score == 0:
                     return 0
                 else: pass
             except: pass
-        return sum(target, -abs(score))
+        return sum([target, -abs(score)])
 
     def gameloop(players):
         """
@@ -59,6 +65,7 @@ class Player:
         Player.players.append(self)
         pass
 
+# create players
 Player1 = Player('Foo', 501)
 Player2 = Player('Bar', 501)
 
