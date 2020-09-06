@@ -1,8 +1,5 @@
 #!/usr/bin/python3
 
-import random
-from time import sleep
-
 """
 Count the scores of darts
 """
@@ -12,31 +9,29 @@ class Game:
     takes the score of the player and count down the score till 0
     """
 
-    def turn(score):
+    def turn(target):
         """
         count scores of darts during one turn
         """
-        s,c = 0,0
+        score = 0
         for d in range(1,4):
-            #sleep(.1)
-            print(score-s)
+            print(target-s)
             ui = input(f"Enter score of dart {d}: ").lower().strip()
-            #ui = random.randint(1,60)
             if ui == 'q': break
             try:
-                s += int(ui)
+                score += int(ui)
                 c += 1
-                if s > score: 
+                if score > target: 
                     print("Too much...")
-                    return score
-                elif score - s == 1:
+                    return target
+                elif target - score == 1:
                     print("Foul!")
-                    return score
-                elif score == s:
+                    return target
+                elif target == score:
                     return 0
                 else: pass
             except: pass
-        return score - s
+        return sum(target, -abs(score))
 
     def gameloop(players):
         """
